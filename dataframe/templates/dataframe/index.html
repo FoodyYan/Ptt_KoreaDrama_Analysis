@@ -1,0 +1,316 @@
+{% include 'navbar.html' %}
+<div id="layoutSidenav_content">
+    <main>
+
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Datasheet</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="{% url 'namespace_dashboard:home' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Datasheet</li>
+            </ol>
+          <!-- <div class="card mb-4">
+                <div class="card-body">
+                    DataTables is a third party plugin that is used to generate the demo table below. For more
+                    information about DataTables, please visit the
+                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                    .
+                </div>
+            </div>   -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Datsheet
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" style="border: 1px;">
+                        <thead>
+                            <tr>
+                                <th width="50px">Date</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <!-- <th>link</th> -->
+                            </tr>
+                        </thead>
+                        <!-- <tfoot>
+                            <tr>
+                                <th>date</th>
+                                <th>title</th>
+                                <th>content</th>
+                            </tr>
+                        </tfoot> -->
+                        <!-- <tbody>
+                                    
+
+                        </tbody> -->
+                    </table>
+                </div>
+                <div id="canvas">
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; PTT Korea Drama 輿情分析 2021</div>
+                <div>
+                    <!-- <a href="#">Privacy Policy</a> -->
+                    &middot;
+                    <!-- <a href="#">Terms &amp; Conditions</a> -->
+                </div>               
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="../../../static/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../../../static/assets/demo/chart-area-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> -->
+<!-- <link href="../static/css/styles.css" rel="stylesheet" /> -->
+<script src="../../../static/js/datatables-simple-demo.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.datatables.net/rss.xml">
+<!-- <link rel="stylesheet" type="text/css" href="/media/css/site-examples.css?_=0602f7ec58abe00302963423bf7a8d5a"> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<!-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+
+</div>
+</body>
+
+</html>
+
+
+<style>
+    /* 滑鼠移過 */
+    #datatablesSimple tbody tr:hover{
+        background-color: #cccccc;
+    }
+    
+    #datatablesSimple tr td {
+        height: 100%;
+        font-size: 16px;
+        border:1px solid #aaa
+    }
+    table {
+        border-collapse:collapse;
+        table-layout:fixed;
+        word-break:break-all;
+    }
+    
+  
+    /* 奇偶換色 */
+    /* <!-- table#dataTable tr.even:hover td { -->
+        <!-- background-color: red; -->
+    <!-- } --> */
+/* 
+    <!-- table#dataTable tr.odd:hover td { -->
+        <!-- background-color: blue; -->
+    <!-- } --> */
+    
+</style>
+
+
+<script type="text/javascript">
+/*
+    $(document).ready(function () {
+
+        
+        var data_ = '123456';
+        
+        $.ajax({
+            type: "GET",
+            url: "api_ptt_df_all",
+            data: {
+                
+            }, // pass to server
+            success: function (response) {
+                // showLineChart(response.lineChartData);
+                // console.log(response);
+                data_ = response.koreadrama_all;
+                alert("success");
+            }, //success function
+            error: function (err) { alert(err) },
+        }); //ajax
+      
+
+
+        // console.log(data_);
+
+        var tableData = [{ "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 },
+        { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }, { "a": 1111, "b": 2222 }];
+
+        tableData = data_;
+        var keys = Object.keys(tableData[0]); // 取得json key
+        var data = tableData;
+
+        var table = "<table id='dataTable' border='1' style='border-collapse: collapse;'>";
+        table += "<thead><tr><th>ID</th>";
+        $.each(keys, function (index, value) {
+            table += "<th class='ui-state-focus'>" + value + "</th>";
+        });
+
+        table += "</tr></thead>";
+        table += "<tbody>";
+
+        var id = 1;
+        $.each(data, function (index, value) {
+            table += "<td align='center'; valign='middle'; >" + id + "</td>";
+            $.each(keys, function (index_, value_) {
+                if (value[value_] == null) {
+                    table += "<td nowrap='nowrap';></td>";
+                } else {
+                    table += "<td nowrap='nowrap';>" + value[value_] + "</td>";
+                }
+            });
+            table += "</tr>";
+            id++
+        });
+        table += "</tbody></table>";
+
+        $('#canvas').append(table);
+
+        $('#dataTable').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [10, 100, 200, 1000],
+            <!-- "dom": '<"wrapper"flipt>', --> tooltip全部至頂
+            "dom": '<lf<t>ip>',
+            <!-- select: true,  -->
+            <!-- scrollY: '80vh',  -->
+            "scrollX": true,
+            "autoWidth": false,
+            <!-- scrollCollapse : true,  -->
+            <!-- paging : false,  -->
+            <!-- stateSave : true, // 記住排序 -->
+            "language": {
+                "sProcessing": "處理中...",
+                "sLengthMenu": "顯示 _MENU_ 筆",
+                "sZeroRecords": "查詢没有紀錄。",
+                "sInfo": "顯示第 _START_ 至 _END_ 筆，共 _TOTAL_ 筆",
+                "sInfoEmpty": "顯示第 0 至 0 筆，共 0 筆",
+                "sInfoFiltered": "(由 _MAX_ 筆中篩選)",
+                "sInfoPostFix": "",
+                "sSearch": "查詢：",
+                "sUrl": "",
+                "sEmptyTable": "表中資料為空",
+                "sLoadingRecords": "載入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "第一頁",
+                    "sPrevious": "上一頁",
+                    "sNext": "下一頁",
+                    "sLast": "最後一頁"
+                }
+            },
+        });
+    });
+*/
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#datatablesSimple').DataTable({
+            "ajax": {
+                "url": "api_ptt_df_all",
+                "type": "GET",
+                "dataSrc": "data"
+            },
+            "columns": [ {"data":"date"},
+             {"data":"title"},
+             {"data":"content"},
+            //  {"data":"link"}
+             ]
+        });
+
+
+
+
+        function call_ajax() {
+            var tab = document.getElementById('datatablesSimple');
+
+            $.ajax({
+                type: "GET",
+                url: "api_ptt_df_all",
+                data: {},
+
+                success: function (received) {
+
+                    const items = received['koreadrama_all'];
+                    console.log(items)
+                    var tradd = tab.insertRow(1);
+                    for (let i = 0; i < items.length; i++) {
+                        // var tradd=tab.insertRow(i+1);
+                        let html_snippet = `<td>{0}</td><td><a href="{2}">{1}</a></td><td>{3}</td>`;
+                        // html_snippet = "{0}{1}{2}{3}{4}".format(items[i].id, items[i].date, items[i].title, items[i].content, items[i].link);
+                        html_snippet = html_snippet.format(items[i].date, items[i].title, items[i].link, items[i].content);
+                        tradd.innerHTML = html_snippet;
+
+                    }
+                    //tradd.innerHTML='<td>新增01</td><td>新增02</td><td>新增03</td><td>新增04</td><td>新增05</td>'  ;
+
+                }, //success function
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                },
+            }); //ajax
+        }
+
+        // call_ajax();
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+    String.prototype.format = function () {
+        let result = this;
+        if (arguments.length == 0)
+            return null;
+        for (let i = 0; i < arguments.length; i++) {
+            let re = new RegExp('\\{' + (i) + '\\}', 'gm');
+            result = result.replace(re, arguments[i]);
+        }
+        return result;
+    };
+
+    // Another alternative way
+    // let result = String.format("{0}  {1}", "Apple","Pineapple")
+    String.format = function () {
+        if (arguments.length == 0)
+            return null;
+        let str = arguments[0];
+        for (let i = 1; i < arguments.length; i++) {
+            let re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+            str = str.replace(re, arguments[i]);
+        }
+        return str;
+    };
+
+
+
+
+</script>
